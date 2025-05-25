@@ -1,24 +1,20 @@
-# Utilise l’image officielle
+# 1) Image de base
 FROM apache/superset:latest
 
+# 2) En root, on installe sqlalchemy-bigquery + le client Google
 USER root
-
-# Installe le provider Superset (tous les drivers) + le dialecte BigQuery
 RUN pip install --no-cache-dir \
-      apache-superset-providers \
-      sqlalchemy-bigquery
+    sqlalchemy-bigquery \
+    google-cloud-bigquery
 
-# Copie ta config perso
-COPY superset_config.py  /app/pythonpath/
-
-# Copie la clé BigQuery
-COPY superset-bq.json    /opt/superset/
-
-# Copie ton script de démarrage et donne-lui les droits
+# 3) Copie de tes fichiers à la racine de l’image
+COPY superset_config.py    /app/pythonpath/
+COPY superset-bq.json      /opt/superset/superset-bq.json
 COPY --chmod=0755 start.sh /start.sh
 
-# Rebasculer sur l’utilisateur non-root
+# 4) On repasse en user superset pour la sécurité
 USER superset
 
-# C’est ton script qui orchestre la DB, l’init & le lancement
+# 5) On lance start.sh au démarrage du conteneur
 ENTRYPOINT ["/start.sh"]
+
