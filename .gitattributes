@@ -1,3 +1,6 @@
 docker/**/*.sh text eol=lf
 *.svg binary
 *.ipynb binary
+
+start.sh text eol=lf
+Dockerfile text eol=lf
