@@ -1,2 +1,3 @@
 FROM apache/superset:latest
-COPY superset_config.py /app/pythonpath/
+
+COPY superset/superset_config.py /app/pythonpath/
