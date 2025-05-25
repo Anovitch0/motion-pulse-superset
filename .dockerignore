@@ -1,14 +1,16 @@
-# 1) Exclure tout le contexte de build par défaut
+# 1) J’ignore tout…
 *
 
-# 2) Mais autoriser explicitement ces deux fichiers
+# 2) …sauf le Dockerfile et le superset_config.py
 !Dockerfile
 !superset_config.py
+!start.sh
+!superset-bq.json
 
-# (Optionnel : si tu inclus aussi ta clé BigQuery dans l’image)
+
+# (si tu inclus aussi ta clé BigQuery dans l’image)
 #!superset-bq.json
 
-# ——— Le reste de ton .dockerignore actuel ———
 
 # Licensed to the Apache Software Foundation (ASF) under one or more
 # contributor license agreements.  See the NOTICE file distributed with
